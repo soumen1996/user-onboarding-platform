@@ -1,0 +1,7 @@
+﻿fastapi
+uvicorn[standard]
+sqlalchemy
+pydantic
+python-jose[cryptography]
+passlib[bcrypt]
+pyodbc

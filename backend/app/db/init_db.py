@@ -1,0 +1,13 @@
+﻿from .base import Base
+from .session import engine
+
+def create_tables():
+    """
+    Create tables in the target database. Ensure AZURE_SQL_CONNECTION_STRING is set in the environment.
+    Use Alembic for production migrations.
+    """
+    Base.metadata.create_all(bind=engine)
+
+if __name__ == "__main__":
+    create_tables()
+    print("Tables created (if they did not already exist).")

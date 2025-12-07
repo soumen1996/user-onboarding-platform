@@ -1,0 +1,14 @@
+﻿from fastapi import FastAPI
+from .api.routers import users
+
+def create_app() -> FastAPI:
+    app = FastAPI(title="Onboarding API")
+
+    @app.get("/health", tags=["health"])
+    async def health():
+        return {"status": "ok"}
+
+    app.include_router(users.router, prefix="/api/v1/users", tags=["users"])
+    return app
+
+app = create_app()

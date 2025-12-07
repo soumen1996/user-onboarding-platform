@@ -1,0 +1,43 @@
+﻿version: "3.8"
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: onboarding_sql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${SA_PASSWORD}
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "${SA_PASSWORD}", "-Q", "SELECT 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - mssqldata:/var/opt/mssql
+
+  backend:
+    build: ./backend
+    container_name: onboarding_backend
+    depends_on:
+      - sqlserver
+    environment:
+      - AZURE_SQL_CONNECTION_STRING=${AZURE_SQL_CONNECTION_STRING}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_ALGORITHM=${JWT_ALGORITHM}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES}
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: onboarding_frontend
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+    ports:
+      - "3000:3000"
+
+volumes:
+  mssqldata:

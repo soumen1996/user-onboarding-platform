@@ -1,0 +1,38 @@
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_URL, // Base URL for the API
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Function to handle user registration
+export const registerUser = async (userData) => {
+  const response = await api.post('/api/v1/users/register', userData);
+  return response.data;
+};
+
+// Function to handle user login
+export const loginUser = async (credentials) => {
+  const response = await api.post('/api/v1/auth/login', credentials);
+  return response.data;
+};
+
+// Function to get user details
+export const getUserDetails = async (userId, token) => {
+  const response = await api.get(`/api/v1/users/${userId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+};
+
+// Function to approve a user
+export const approveUser = async (userId, token) => {
+  const response = await api.post(`/api/v1/approvals/${userId}`, {}, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+};
+
+export default api;

@@ -1,0 +1,13 @@
+import React from 'react';
+
+const Admin: React.FC = () => {
+    return (
+        <div>
+            <h1>Admin Dashboard</h1>
+            <p>Welcome to the admin panel. Here you can manage users and approvals.</p>
+            {/* Additional admin functionalities will be added here */}
+        </div>
+    );
+};
+
+export default Admin;

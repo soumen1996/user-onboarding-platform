@@ -1,0 +1,54 @@
+# User Onboarding and Approval Platform
+
+## Overview
+This project is a secure User Onboarding and Approval Platform designed to facilitate user registration, approval processes, and role management. It utilizes a modern tech stack including FastAPI for the backend, React for the frontend, and Azure SQL Database for data storage. The application is built with security in mind, implementing JWT authentication and role-based access control.
+
+## Tech Stack
+- **Frontend**: React
+- **Backend**: FastAPI (Python)
+- **Database**: Azure SQL Database
+- **Authentication**: JWT
+- **Containerization**: Docker + Docker Compose
+
+## Features
+- User registration and login
+- Role management (USER and ADMIN)
+- User approval workflow
+- Secure API endpoints
+- Environment variable management for secrets
+
+## Folder Structure
+The project is organized into three main directories:
+- **backend**: Contains the FastAPI application code, including models, schemas, CRUD operations, and API endpoints.
+- **frontend**: Contains the React application code, including components, pages, and services for API interaction.
+- **infra**: Contains Docker configurations, environment variable templates, and SQL initialization scripts.
+
+## Getting Started
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   cd user-onboarding-platform
+   ```
+
+2. Set up environment variables:
+   - Copy the example environment files in the `infra` directory and fill in the required values.
+   ```
+   cp infra/backend.env.example infra/backend.env
+   cp infra/frontend.env.example infra/frontend.env
+   cp infra/.env.example infra/.env
+   ```
+
+3. Build and run the application using Docker Compose:
+   ```
+   docker-compose up --build
+   ```
+
+4. Access the application:
+   - Frontend: `http://localhost:3000`
+   - Backend: `http://localhost:8000`
+
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for more details.
